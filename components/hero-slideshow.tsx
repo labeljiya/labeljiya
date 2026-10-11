@@ -31,12 +31,15 @@ export function HeroSlideshow({
 
     return () => clearInterval(interval);
   }, [products.length]);
+    if (products.length === 0) {
+      return null;
+    }
 
-  if (products.length === 0) {
-    return null;
-  }
+    const product = products[currentIndex] ?? products[0];
 
-  const product = products[currentIndex];
+    if (!product) {
+      return null;
+    }
 
   return (
     <div className="relative min-h-[500px] overflow-hidden bg-[#d8cec2]">

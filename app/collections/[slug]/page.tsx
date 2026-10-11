@@ -43,7 +43,7 @@ export default async function CollectionPage({
   const collectionName =
     slug === "sale"
       ? "Sale Collection"
-      : collectionProducts[0].category;
+      : collectionProducts[0]?.category ?? "";
 
   return (
     <main className="min-h-screen bg-[#f8f5f1] text-[#292522]">

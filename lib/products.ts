@@ -74,7 +74,7 @@ export const products: Product[] = [
     id: "Green-anarkali-06",
     name: "Green A-line Set with Embroidered yoke and Dupatta",
     mrp: 3600,
-    discount: 10,
+    discount: 0,
     category: "Anarkali Set",
     image: "/images/anarkali/g1.png",
     images: [

@@ -1,29 +1,61 @@
 import { AddToCart } from "components/cart/add-to-cart";
-import Price from "components/price";
-import Prose from "components/prose";
-import { Product } from "lib/shopify/types";
-import { VariantSelector } from "./variant-selector";
+import { getSalePrice, type Product } from "lib/products";
 
-export function ProductDescription({ product }: { product: Product }) {
+type ProductDescriptionProps = {
+  product: Product;
+};
+
+export function ProductDescription({
+  product,
+}: ProductDescriptionProps) {
   return (
-    <>
-      <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">
-        <h1 className="mb-2 text-5xl font-medium">{product.title}</h1>
-        <div className="mr-auto w-auto rounded-full bg-blue-600 p-2 text-sm text-white">
-          <Price
-            amount={product.priceRange.maxVariantPrice.amount}
-            currencyCode={product.priceRange.maxVariantPrice.currencyCode}
-          />
+    <div>
+      {/* PRODUCT NAME AND PRICE */}
+      <div className="mb-6 flex flex-col border-b border-[#e5ded6] pb-6">
+        <p className="mb-3 text-xs uppercase tracking-[0.3em] text-[#8b7355]">
+          {product.category}
+        </p>
+
+        <h1 className="mb-4 font-serif text-4xl font-medium text-[#292522] md:text-5xl">
+          {product.name}
+        </h1>
+
+        <div className="flex flex-wrap items-center gap-3">
+          {product.discount > 0 && (
+            <span className="text-base text-[#8b8178] line-through">
+              ₹{product.mrp.toLocaleString("en-IN")}
+            </span>
+          )}
+
+          <span className="text-lg font-medium text-[#292522]">
+            ₹{getSalePrice(product).toLocaleString("en-IN")}
+          </span>
+
+          {product.discount > 0 && (
+            <span className="text-xs font-medium text-[#8b7355]">
+              {product.discount}% OFF
+            </span>
+          )}
         </div>
       </div>
-      <VariantSelector options={product.options} variants={product.variants} />
-      {product.descriptionHtml ? (
-        <Prose
-          className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-          html={product.descriptionHtml}
-        />
-      ) : null}
-      <AddToCart product={product} />
-    </>
+
+      {/* PRODUCT DESCRIPTION */}
+      {product.description && (
+        <p className="mb-6 text-sm leading-7 text-[#625a53]">
+          {product.description}
+        </p>
+      )}
+
+      {/* ADD TO CART */}
+      <AddToCart
+        id={product.id}
+        name={product.name}
+        price={getSalePrice(product)}
+        mrp={product.mrp}
+        discount={product.discount}
+        image={product.image}
+        sizes={product.sizes}
+      />
+    </div>
   );
 }

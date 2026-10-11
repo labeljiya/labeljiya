@@ -15,7 +15,6 @@ export async function generateMetadata({
   params,
 }: ProductPageProps) {
   const { handle } = await params;
-
   const product = products.find((item) => item.id === handle);
 
   if (!product) {
@@ -34,7 +33,6 @@ export default async function ProductPage({
   params,
 }: ProductPageProps) {
   const { handle } = await params;
-
   const product = products.find((item) => item.id === handle);
 
   if (!product) {
@@ -43,10 +41,9 @@ export default async function ProductPage({
 
   return (
     <main className="min-h-screen bg-[#faf8f5] text-[#292522]">
-      {/* ==================== HEADER ==================== */}
+      {/* HEADER */}
       <header className="border-b border-[#e5ded6] bg-[#faf8f5]">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:px-10">
-          {/* LOGO */}
           <Link
             href="/"
             className="font-serif text-2xl tracking-[0.12em]"
@@ -54,7 +51,6 @@ export default async function ProductPage({
             LABEL JIYA
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
           <nav className="hidden items-center gap-8 md:flex">
             <Link
               href="/#collection"
@@ -78,33 +74,23 @@ export default async function ProductPage({
             </Link>
           </nav>
 
-          {/* HEADER ACTIONS */}
           <div className="flex items-center gap-5">
-            
-
-            {/* Shopping Cart */}
             <CartButton />
           </div>
         </div>
       </header>
 
-      {/* ==================== PRODUCT ==================== */}
+      {/* PRODUCT */}
       <section className="mx-auto max-w-7xl px-6 py-12 md:px-10 md:py-20">
-        {/* Breadcrumb */}
+        {/* BREADCRUMB */}
         <div className="mb-8 text-xs uppercase tracking-[0.15em] text-[#81766c]">
-          <Link
-            href="/"
-            className="hover:text-black"
-          >
+          <Link href="/" className="hover:text-black">
             Home
           </Link>
 
           <span className="mx-2">/</span>
 
-          <Link
-            href="/#collection"
-            className="hover:text-black"
-          >
+          <Link href="/#collection" className="hover:text-black">
             Collection
           </Link>
 
@@ -114,20 +100,18 @@ export default async function ProductPage({
         </div>
 
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
-          {/* ==================== PRODUCT GALLERY ==================== */}
+          {/* PRODUCT GALLERY */}
           <ProductGallery
             images={product.images}
             productName={product.name}
           />
 
-          {/* ==================== PRODUCT DETAILS ==================== */}
+          {/* PRODUCT DETAILS */}
           <div className="flex flex-col justify-center">
-            {/* CATEGORY */}
             <p className="text-xs uppercase tracking-[0.3em] text-[#8b7355]">
               {product.category}
             </p>
 
-            {/* PRODUCT NAME */}
             <h1 className="mt-4 font-serif text-4xl leading-tight md:text-5xl">
               {product.name}
             </h1>
@@ -158,7 +142,7 @@ export default async function ProductPage({
               {product.description}
             </p>
 
-            {/* ==================== ADD TO CART ==================== */}
+            {/* ADD TO CART */}
             <AddToCart
               id={product.id}
               name={product.name}
@@ -169,9 +153,8 @@ export default async function ProductPage({
               sizes={product.sizes}
             />
 
-            {/* ==================== PRODUCT INFORMATION ==================== */}
+            {/* PRODUCT INFORMATION */}
             <div className="mt-10 border-t border-[#e5ded6]">
-              {/* Product Details */}
               <div className="border-b border-[#e5ded6] py-5">
                 <p className="text-xs uppercase tracking-[0.2em]">
                   Product Details
@@ -184,7 +167,6 @@ export default async function ProductPage({
                 </p>
               </div>
 
-              {/* Shipping */}
               <div className="border-b border-[#e5ded6] py-5">
                 <p className="text-xs uppercase tracking-[0.2em]">
                   Shipping & Delivery
@@ -196,7 +178,6 @@ export default async function ProductPage({
                 </p>
               </div>
 
-              {/* Returns */}
               <div className="py-5">
                 <p className="text-xs uppercase tracking-[0.2em]">
                   Returns & Exchanges
@@ -212,7 +193,7 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* ==================== BACK TO SHOP ==================== */}
+      {/* BACK TO SHOP */}
       <section className="border-t border-[#e5ded6] px-6 py-12 text-center">
         <Link
           href="/#collection"
@@ -222,7 +203,7 @@ export default async function ProductPage({
         </Link>
       </section>
 
-      {/* ==================== FOOTER ==================== */}
+      {/* FOOTER */}
       <footer className="bg-[#292522] px-6 py-12 text-white md:px-10">
         <div className="mx-auto max-w-7xl text-center">
           <h2 className="font-serif text-2xl tracking-[0.12em]">
@@ -235,7 +216,7 @@ export default async function ProductPage({
           </p>
 
           <p className="mt-8 text-xs text-[#a99e94]">
-            © 2026 LABEL JIYA. All rights reserved.
+            © {new Date().getFullYear()} LABEL JIYA. All rights reserved.
           </p>
         </div>
       </footer>
