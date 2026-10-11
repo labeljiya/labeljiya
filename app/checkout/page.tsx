@@ -1,12 +1,35 @@
-
 "use client";
 
 import { useCart } from "components/cart/cart-context";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+
+type StockWarning = {
+  id: string;
+  size: string;
+  requested: number;
+  available: number;
+};
 
 export default function CheckoutPage() {
-  const { items, subtotal } = useCart();
+  const { items, subtotal, correctStock } = useCart();
+
+  const [stockWarnings, setStockWarnings] = useState<StockWarning[]>([]);
+  const [checkingStock, setCheckingStock] = useState(false);
+  const checkedStock = useRef(false);
+
+  useEffect(() => {
+    if (checkedStock.current) return;
+
+    checkedStock.current = true;
+
+    const corrections = correctStock();
+
+    if (corrections.length > 0) {
+      setStockWarnings(corrections);
+    }
+  }, [correctStock]);
 
   function handleWhatsAppOrder(
     event: React.MouseEvent<HTMLButtonElement>
@@ -25,6 +48,29 @@ export default function CheckoutPage() {
 
     if (!form.checkValidity()) {
       form.reportValidity();
+      return;
+    }
+
+    setCheckingStock(true);
+
+    const corrections = correctStock();
+
+    if (corrections.length > 0) {
+      setStockWarnings((previous) => {
+        const merged = new Map<string, StockWarning>();
+
+        [...previous, ...corrections].forEach((warning) => {
+          merged.set(`${warning.id}-${warning.size}`, warning);
+        });
+
+        return Array.from(merged.values());
+      });
+
+      alert(
+        "Some item quantities have changed because of stock availability. Please review your bag and try again."
+      );
+
+      setCheckingStock(false);
       return;
     }
 
@@ -80,6 +126,7 @@ Please confirm product availability, shipping charges and payment details. Thank
     )}`;
 
     window.location.href = whatsappUrl;
+    setCheckingStock(false);
   }
 
   if (items.length === 0) {
@@ -111,9 +158,7 @@ Please confirm product availability, shipping charges and payment details. Thank
         </header>
 
         <section className="mx-auto max-w-2xl px-6 py-24 text-center">
-          <h1 className="text-3xl font-light">
-            Your bag is empty
-          </h1>
+          <h1 className="text-3xl font-light">Your bag is empty</h1>
           <p className="mt-4 text-sm text-[#756b63]">
             Add a product to your bag before checking out.
           </p>
@@ -171,12 +216,26 @@ Please confirm product availability, shipping charges and payment details. Thank
           </h1>
         </div>
 
+        {stockWarnings.length > 0 && (
+          <div className="mb-8 border border-[#c9a66b] bg-[#fffaf0] p-5 text-sm">
+            <h2 className="font-medium">Please review your stock quantities</h2>
+            <p className="mt-2 text-[#756b63]">
+              Stock availability has changed. Check your bag before placing
+              your order.
+            </p>
+            <Link
+              href="/cart"
+              className="mt-3 inline-block underline underline-offset-4"
+            >
+              Review your bag
+            </Link>
+          </div>
+        )}
+
         <form>
           <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr]">
             <div className="border border-[#ded6ce] bg-white p-6 lg:p-8">
-              <h2 className="text-xl font-light">
-                Delivery Details
-              </h2>
+              <h2 className="text-xl font-light">Delivery Details</h2>
 
               <div className="mt-8 grid gap-6">
                 <div>
@@ -319,9 +378,7 @@ Please confirm product availability, shipping charges and payment details. Thank
             </div>
 
             <aside className="h-fit border border-[#ded6ce] bg-white p-7 lg:p-8">
-              <h2 className="text-xl font-light">
-                Your Order
-              </h2>
+              <h2 className="text-xl font-light">Your Order</h2>
 
               <div className="mt-7 space-y-5">
                 {items.map((item) => (
@@ -385,15 +442,16 @@ Please confirm product availability, shipping charges and payment details. Thank
               <button
                 type="button"
                 onClick={handleWhatsAppOrder}
-                className="mt-7 w-full bg-[#292522] px-6 py-4 text-xs font-medium uppercase tracking-[0.2em] text-white transition hover:bg-[#4a4039]"
+                disabled={checkingStock}
+                className="mt-7 w-full bg-[#292522] px-6 py-4 text-xs font-medium uppercase tracking-[0.2em] text-white transition hover:bg-[#4a4039] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Place Order on WhatsApp
+                {checkingStock ? "Checking Stock..." : "Place Order on WhatsApp"}
               </button>
 
               <p className="mt-4 text-center text-xs leading-5 text-[#756b63]">
-                Your order details will open in WhatsApp.
-                Review and send the message to place your order.
-                Shipping charges and payment will be confirmed by LABEL JIYA.
+                Your order details will open in WhatsApp. Review and send the
+                message to place your order. Shipping charges and payment will
+                be confirmed by LABEL JIYA.
               </p>
             </aside>
           </div>

@@ -1,3 +1,9 @@
+
+export type SizeStock = {
+  size: string;
+  quantity: number;
+};
+
 export type Product = {
   id: string;
   name: string;
@@ -7,7 +13,7 @@ export type Product = {
   image: string;
   images: string[];
   description: string;
-  sizes: string[];
+  sizes: SizeStock[];
 };
 
 export const products: Product[] = [
@@ -27,12 +33,21 @@ export const products: Product[] = [
     ],
     description:
       "Elegant pink anarkali suit designed for festive occasions and celebrations.",
-    sizes: ["L", "XL", "2XL", "3XL"],
+    sizes: [
+      { size: "XS", quantity: 0 },
+      { size: "S", quantity: 0 },
+      { size: "M", quantity: 0 },
+      { size: "L", quantity: 1 },
+      { size: "XL", quantity: 1 },
+      { size: "2XL", quantity: 1 },
+      { size: "3XL", quantity: 1 },
+      { size: "4XL", quantity: 0 },
+    ],
   },
 
   {
     id: "Orange-anarkali-04",
-    name: "Orange A-line Set with Embroidered pink Yoke and Sleeves ",
+    name: "Orange A-line Set with Embroidered pink Yoke and Sleeves",
     mrp: 3600,
     discount: 10,
     category: "Anarkali Set",
@@ -42,17 +57,24 @@ export const products: Product[] = [
       "/images/anarkali/e2.png",
       "/images/anarkali/e3.png",
       "/images/anarkali/e4.png",
-
-      
     ],
     description:
       "Elegant pink A-Line suit designed for Daily Wear and Outing.",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "XS", quantity: 0 },
+      { size: "S", quantity: 1 },
+      { size: "M", quantity: 1 },
+      { size: "L", quantity: 1 },
+      { size: "XL", quantity: 1 },
+      { size: "2XL", quantity: 0 },
+      { size: "3XL", quantity: 0 },
+      { size: "4XL", quantity: 0 },
+    ],
   },
 
   {
     id: "Purple-anarkali-05",
-    name: "Purple A-line Set with Embroidered Yoke and Heavy Dupatta ",
+    name: "Purple A-line Set with Embroidered Yoke and Heavy Dupatta",
     mrp: 2875,
     discount: 20,
     category: "Anarkali Set",
@@ -61,13 +83,19 @@ export const products: Product[] = [
       "/images/anarkali/f1.png",
       "/images/anarkali/f2.png",
       "/images/anarkali/f3.png",
-      
-
-      
     ],
     description:
       "Elegant purple A-Line suit designed for Festive Wear and Wedding Wear.",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "XS", quantity: 0 },
+      { size: "S", quantity: 1 },
+      { size: "M", quantity: 1 },
+      { size: "L", quantity: 1 },
+      { size: "XL", quantity: 1 },
+      { size: "2XL", quantity: 0 },
+      { size: "3XL", quantity: 0 },
+      { size: "4XL", quantity: 0 },
+    ],
   },
 
   {
@@ -80,20 +108,24 @@ export const products: Product[] = [
     images: [
       "/images/anarkali/g1.png",
       "/images/anarkali/g2.png",
-     
-         
     ],
     description:
       "Elegant pink A-Line suit designed for WEDDING WEAR and FESTIVE WEAR.",
-    sizes: ["M", "L", "XL"],
+    sizes: [
+      { size: "XS", quantity: 0 },
+      { size: "S", quantity: 0 },
+      { size: "M", quantity: 1 },
+      { size: "L", quantity: 1 },
+      { size: "XL", quantity: 1 },
+      { size: "2XL", quantity: 0 },
+      { size: "3XL", quantity: 0 },
+      { size: "4XL", quantity: 0 },
+    ],
   },
-
-  
-  
 
   {
     id: "Pink-anarkali-02",
-    name: "Pink A-line Knot-Sleeves with Mandala Embroidery ",
+    name: "Pink A-line Knot-Sleeves with Mandala Embroidery",
     mrp: 1195,
     discount: 5,
     category: "Anarkali Set",
@@ -101,14 +133,20 @@ export const products: Product[] = [
     images: [
       "/images/anarkali/c2.png",
       "/images/anarkali/c1.png",
-      
     ],
     description:
       "Elegant pink A-Line suit designed for Daily Wear and Outing.",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: [
+      { size: "XS", quantity: 0 },
+      { size: "S", quantity: 1 },
+      { size: "M", quantity: 1 },
+      { size: "L", quantity: 1 },
+      { size: "XL", quantity: 1 },
+      { size: "2XL", quantity: 0 },
+      { size: "3XL", quantity: 0 },
+      { size: "4XL", quantity: 0 },
+    ],
   },
-
-  
 
   {
     id: "CORD-SET-01",
@@ -125,12 +163,21 @@ export const products: Product[] = [
     ],
     description:
       "Highlighting the finishing and detailing of the CoRD Set.",
-    sizes: ["XS", "S", "M", "L"],
+    sizes: [
+      { size: "XS", quantity: 1 },
+      { size: "S", quantity: 1 },
+      { size: "M", quantity: 1 },
+      { size: "L", quantity: 1 },
+      { size: "XL", quantity: 0 },
+      { size: "2XL", quantity: 0 },
+      { size: "3XL", quantity: 0 },
+      { size: "4XL", quantity: 0 },
+    ],
   },
 
-{
+  {
     id: "Hot-pink-anarkali-02",
-    name: "Hot Pink A-line with Embroidered Yoke and Pockets ",
+    name: "Hot Pink A-line with Embroidered Yoke and Pockets",
     mrp: 1845,
     discount: 5,
     category: "Anarkali Set",
@@ -144,10 +191,17 @@ export const products: Product[] = [
     ],
     description:
       "Elegant pink anarkali suit designed for festive occasions and celebrations.",
-    sizes: ["L", "XL", "2XL", "3XL"],
+    sizes: [
+      { size: "XS", quantity: 0 },
+      { size: "S", quantity: 0 },
+      { size: "M", quantity: 0 },
+      { size: "L", quantity: 1 },
+      { size: "XL", quantity: 1 },
+      { size: "2XL", quantity: 1 },
+      { size: "3XL", quantity: 1 },
+      { size: "4XL", quantity: 0 },
+    ],
   },
-
-
 
   {
     id: "straight-suits",
@@ -165,7 +219,16 @@ export const products: Product[] = [
     ],
     description:
       "Elegant pink anarkali suit designed for festive occasions and celebrations.",
-    sizes: ["L", "XL", "2XL", "3XL"],
+    sizes: [
+      { size: "XS", quantity: 0 },
+      { size: "S", quantity: 0 },
+      { size: "M", quantity: 0 },
+      { size: "L", quantity: 1 },
+      { size: "XL", quantity: 1 },
+      { size: "2XL", quantity: 1 },
+      { size: "3XL", quantity: 1 },
+      { size: "4XL", quantity: 0 },
+    ],
   },
 ];
 
@@ -179,8 +242,7 @@ export function getSalePrice(product: Product) {
   }
 
   return Math.round(
-    product.mrp -
-      (product.mrp * product.discount) / 100
+    product.mrp - (product.mrp * product.discount) / 100
   );
 }
 

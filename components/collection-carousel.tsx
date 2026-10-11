@@ -1,24 +1,13 @@
 "use client";
 
+import type { Product } from "lib/products";
 import { getSalePrice } from "lib/products";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type CollectionProduct = {
-  id: string;
-  name: string;
-  mrp: number;
-  discount: number;
-  category: string;
-  image: string;
-  images: string[];
-  description: string;
-  sizes: string[];
-};
-
 type CollectionCarouselProps = {
-  products: CollectionProduct[];
+  products: Product[];
 };
 
 export function CollectionCarousel({
@@ -70,7 +59,6 @@ export function CollectionCarousel({
   return (
     <section className="bg-[#eee7df] px-6 py-20 md:px-10 md:py-28">
       <div className="mx-auto max-w-7xl">
-
         {/* Centered Header */}
         <div className="relative mb-10 text-center">
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#8b7355]">
@@ -127,21 +115,18 @@ export function CollectionCarousel({
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
 
-                {/* Centered Category Label */}
                 <span className="absolute left-1/2 top-4 z-10 -translate-x-1/2 whitespace-nowrap bg-white/95 px-4 py-2 text-center text-[10px] uppercase tracking-[0.15em]">
                   {product.category}
                 </span>
 
-                {/* Image Hover Overlay */}
                 <div className="absolute inset-0 bg-black/0 transition duration-500 group-hover:bg-black/10" />
 
-                {/* View Product */}
                 <div className="absolute bottom-4 left-4 right-4 translate-y-2 bg-white/95 px-4 py-3 text-center text-[10px] uppercase tracking-[0.18em] opacity-0 backdrop-blur-sm transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                   View Product →
                 </div>
               </div>
 
-              {/* Centered Product Details */}
+              {/* Product Details */}
               <div className="px-2 pt-4">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-[#8b7355]">
                   {product.category}
@@ -197,7 +182,7 @@ export function CollectionCarousel({
           </div>
         )}
 
-        {/* Centered Collection Button */}
+        {/* Collection Button */}
         <div className="mt-10 text-center">
           {currentCategory && (
             <Link
