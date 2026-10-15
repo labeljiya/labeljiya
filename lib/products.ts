@@ -61,22 +61,19 @@ export const products: Product[] = [
     description:
       "Elegant pink A-Line suit designed for Daily Wear and Outing.",
     sizes: [
-      { size: "XS", quantity: 0 },
-      { size: "S", quantity: 1 },
+     
       { size: "M", quantity: 1 },
       { size: "L", quantity: 1 },
       { size: "XL", quantity: 1 },
-      { size: "2XL", quantity: 0 },
-      { size: "3XL", quantity: 0 },
-      { size: "4XL", quantity: 0 },
+     
     ],
   },
 
   {
     id: "Purple-anarkali-05",
-    name: "Purple A-line Set with Embroidered Yoke and Heavy Dupatta",
-    mrp: 2875,
-    discount: 20,
+    name: "Women's Purple A-line Set with Embroidered Yoke and Heavy Dupatta",
+    mrp: 2345,
+    discount: 15,
     category: "Anarkali Set",
     image: "/images/anarkali/f1.png",
     images: [
